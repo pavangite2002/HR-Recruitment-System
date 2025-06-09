@@ -1,5 +1,7 @@
 package com.example.employeemodel.dto;
 
+import com.example.employeemodel.validation.NullOrNotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +10,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SubCategoryDto {
+
     private Long id;
+
+    @NullOrNotBlank(min = 2, max = 100, isMandatory = "yes", message = "Sub-category name is required and must be between {min} and {max} characters.")
     private String name;
+
+    @NotNull(message = "Department ID is required for sub-category.")
     private Long departmentId;
 }
