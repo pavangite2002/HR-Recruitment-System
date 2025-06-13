@@ -1,7 +1,8 @@
 package com.example.employeemodel.dto;
 
 import com.example.employeemodel.validation.NullOrNotBlank;
-import jakarta.validation.Valid;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import java.util.List;
@@ -9,9 +10,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class CompanyDto {
-
-    private Long id;
 
     @NullOrNotBlank(min = 2, max = 100, isMandatory = "yes", message = "Company name is required and must be between {min} and {max} characters.")
     private String name;
@@ -19,9 +20,12 @@ public class CompanyDto {
     @NullOrNotBlank(min = 5, max = 255, isMandatory = "no", message = "Address (optional) must be between {min} and {max} characters if provided.")
     private String address;
 
-    @NullOrNotBlank(min = 2, max = 100, isMandatory = "no", message = "Industry (optional) must be between {min} and {max} characters if provided.")
+    @NullOrNotBlank(min = 2, max = 50, isMandatory = "no", message = "Industry (optional) must be between {min} and {max} characters if provided.")
     private String industry;
 
-    @Valid
-    private List<DeptDto> departments;
+    @NullOrNotBlank(min = 2, max = 100, isMandatory = "yes", message = "Website must be between {min} and {max} characters if provided.")
+    private String website;
+
+    private List<DepartmentDto> departments;
 }
+

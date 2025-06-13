@@ -2,6 +2,8 @@ package com.example.employeemodel.dto;
 
 
 import com.example.employeemodel.validation.NullOrNotBlank;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
@@ -13,8 +15,9 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class EmployeeDto {
-    private Long id;
 
     @NullOrNotBlank(min = 2, max = 30, message = "First name must be between {min} and {max} characters long.")
     private String firstName;
@@ -44,16 +47,16 @@ public class EmployeeDto {
     @NotNull(message = "Date of joining is required.")
     private LocalDate dateOfJoining;
 
-    @NotNull(message = "Department ID is required.")
-    private Long departmentId;
-
-    @NotNull(message = "Company ID is required.")
-    private Long companyId;
-
-    @NotNull(message = "Sub-category ID is required.")
-    private Long subCategoryId;
-
     @NullOrNotBlank(message = "Status is required.")
     private String status;
+
+//    @NotNull(message = "Department ID is required.")
+//    private Long departmentId;
+//
+//    @NotNull(message = "Company ID is required.")
+//    private Long companyId;
+//
+//    @NotNull(message = "Sub-category ID is required.")
+//    private Long subCategoryId;
 
 }

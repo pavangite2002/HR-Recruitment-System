@@ -1,0 +1,18 @@
+
+
+caching redis caffin
+jpa Query JPQL
+
+controller advice aop
+hibernate
+
+git repo
+
+rest api 
+composite
+primary
+fk
+
+
+one to one many to one
+pagination

@@ -1,6 +1,8 @@
 package com.example.employeemodel.dto;
 
 import com.example.employeemodel.validation.NullOrNotBlank;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -12,16 +14,18 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DeptDto {
-
-    private Long id;
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
+public class DepartmentDto {
 
     @NullOrNotBlank(min = 2, max = 100, isMandatory = "yes", message = "Department name is required and must be between {min} and {max} characters.")
     private String name;
 
-    @NotNull(message = "Company ID is required for department.")
-    private Long companyId;
+    @NullOrNotBlank(isMandatory = "no", min = 5, max = 255, message = "Description (optional) must be between {min} and {max} characters.")
+    private String description;
 
-    @Valid
     private List<SubCategoryDto> subCategories;
+
+//    @NotNull(message = "Company ID is required for department.")
+//    private Long companyId;
 }
