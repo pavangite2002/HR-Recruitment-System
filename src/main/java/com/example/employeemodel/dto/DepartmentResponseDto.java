@@ -16,6 +16,6 @@ public class DepartmentResponseDto {
     private Long id;
     private String name;
     private String description;
-    private List<SubCategoryDto> subCategories;
-    private List<EmployeeDto> employees;
+    private List<SubCategoryResponseDto> subCategories;
+    private List<EmployeeResponseDto> employees;
 }

@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class SubCategoryDto {
 
     @NullOrNotBlank(min = 2, max = 100, isMandatory = "yes", message = "Sub-category name is required and must be between {min} and {max} characters.")
     private String name;
 
+}
+
 //    @NotNull(message = "Department ID is required for sub-category.")
 //    private Long departmentId;
-}

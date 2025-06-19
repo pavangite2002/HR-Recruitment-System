@@ -14,23 +14,23 @@ import java.util.List;
 public interface CompanyMapper {
 
 
-    @Mappings({
-            @Mapping(source = "name", target = "name"),
-            @Mapping(source = "address", target = "address"),
-            @Mapping(source = "industry", target = "industry"),
-            @Mapping(source = "website", target = "website"),
-            @Mapping(source = "departments", target = "departments")
-    })
+    @Mapping(source = "name", target = "name")
+    @Mapping(source = "address", target = "address")
+    @Mapping(source = "industry", target = "industry")
+    @Mapping(source = "website", target = "website")
     Company companyDtoToCompanyEntity(CompanyDto dto);
 
     @Mapping(source = "name", target = "name")
     @Mapping(source = "address", target = "address")
     @Mapping(source = "industry", target = "industry")
     @Mapping(source = "website", target = "website")
-    @Mapping(source = "departments", target = "departments")
     CompanyResponseDto companyToCompanyResponseDto(Company entity);
 
     List<CompanyResponseDto> listCompanyToCompanyResponseDto(List<Company> companies);
 
 }
+
+
+//    @Mapping(source = "departments", target = "departments")
+//    @Mapping(source = "departments", target = "departments")
 

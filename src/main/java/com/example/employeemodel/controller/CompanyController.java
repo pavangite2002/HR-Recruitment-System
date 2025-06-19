@@ -2,18 +2,19 @@ package com.example.employeemodel.controller;
 
 import com.example.employeemodel.dto.CompanyDto;
 import com.example.employeemodel.dto.CompanyResponseDto;
-import com.example.employeemodel.model.Company;
+import com.example.employeemodel.dto.RestApiResponse;
 import com.example.employeemodel.service.CompanyService;
-import com.example.employeemodel.service.impl.CompanyServiceImpl;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Schema;
-
+import static com.example.employeemodel.util.ResponseBuilder.*;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/companies")
@@ -23,36 +24,36 @@ public class CompanyController {
     private final CompanyService companyService;
 
     @PostMapping
-    public ResponseEntity<CompanyResponseDto> createCompany(@Valid @RequestBody CompanyDto companyDto) {
+    public ResponseEntity<RestApiResponse<CompanyResponseDto>> createCompany(@Valid @RequestBody CompanyDto companyDto) {
         CompanyResponseDto createdCompany = companyService.create(companyDto);
-        return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(success("Company created successfully", createdCompany));
     }
 
     @GetMapping
-    public ResponseEntity<List<CompanyResponseDto>> getAllCompanies() {
+    public ResponseEntity<RestApiResponse<List<CompanyResponseDto>>> getAllCompanies() {
         List<CompanyResponseDto> companies = companyService.getAll();
-        return new ResponseEntity<>(companies,HttpStatus.OK);
+        return ResponseEntity.ok(success("Companies fetched successfully", companies));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CompanyResponseDto> getCompanyById(@PathVariable Long id) {
-        CompanyResponseDto company = companyService.getById(id);
-        return new ResponseEntity<>(company,HttpStatus.OK);    }
-
+    public ResponseEntity<RestApiResponse<CompanyResponseDto>> getCompanyById(@PathVariable Long id) {
+            CompanyResponseDto company = companyService.getById(id);
+            return ResponseEntity.ok(success("Company found", company));
+    }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CompanyResponseDto> updateCompany(@PathVariable(name = "id") Long id,
-                                                    @Parameter(required = false,
-                                                            schema = @Schema(implementation = CompanyDto.class))
-                                                    @RequestBody String companyDto
-                                                    ) {
-
-        return ResponseEntity.status(HttpStatus.OK).body(companyService.update(id,companyDto));
+    public ResponseEntity<RestApiResponse<CompanyResponseDto>> updateCompany(
+            @PathVariable(name = "id") Long id,
+            @Parameter(required = false, schema = @Schema(implementation = CompanyDto.class))
+            @RequestBody String companyDto) throws BadRequestException {
+            CompanyResponseDto updated = companyService.update(id, companyDto);
+            return ResponseEntity.ok(success("Company updated successfully", updated));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCompany(@PathVariable Long id) {
-        companyService.delete(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<RestApiResponse<String>> deleteCompany(@PathVariable Long id) {
+            companyService.delete(id);
+            return ResponseEntity.ok(success("Company deleted successfully"));
     }
 }

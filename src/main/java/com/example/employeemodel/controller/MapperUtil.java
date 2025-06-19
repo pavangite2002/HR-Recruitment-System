@@ -16,7 +16,6 @@ public class MapperUtil {
         }
     }
 
-
     public <S, T> T mapObject(S sourceObject, Class<T> targetClass) {
         return objectMapper.convertValue(sourceObject, targetClass);
     }

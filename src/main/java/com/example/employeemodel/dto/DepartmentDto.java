@@ -24,8 +24,6 @@ public class DepartmentDto {
     @NullOrNotBlank(isMandatory = "no", min = 5, max = 255, message = "Description (optional) must be between {min} and {max} characters.")
     private String description;
 
-    private List<SubCategoryDto> subCategories;
-
-//    @NotNull(message = "Company ID is required for department.")
-//    private Long companyId;
+    @NotNull(message = "Company ID is required for department.")
+    private Long companyId;
 }

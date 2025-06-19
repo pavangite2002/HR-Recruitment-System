@@ -27,7 +27,6 @@ public class Department {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
-    @JsonIgnore
     private Company company;
 
     @OneToMany(mappedBy = "department",cascade = CascadeType.ALL,orphanRemoval = true)

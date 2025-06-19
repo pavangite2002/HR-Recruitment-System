@@ -16,7 +16,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class EmployeeDto {
 
     @NullOrNotBlank(min = 2, max = 30, message = "First name must be between {min} and {max} characters long.")
@@ -51,12 +50,11 @@ public class EmployeeDto {
     private String status;
 
 //    @NotNull(message = "Department ID is required.")
-//    private Long departmentId;
-//
-//    @NotNull(message = "Company ID is required.")
-//    private Long companyId;
-//
-//    @NotNull(message = "Sub-category ID is required.")
-//    private Long subCategoryId;
+    private Long departmentId;
 
+//    @NotNull(message = "Company ID is required.")
+    private Long companyId;
+
+//    @NotNull(message = "Sub-category ID is required.")
+    private Long subCategoryId;
 }
