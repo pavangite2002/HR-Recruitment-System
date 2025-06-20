@@ -7,18 +7,16 @@ import com.example.employeemodel.mapper.CompanyMapper;
 import com.example.employeemodel.model.Company;
 import com.example.employeemodel.repository.CompanyRepository;
 import com.example.employeemodel.service.CompanyService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.*;
 
-import static com.example.employeemodel.util.UpdateUtils.getJsonNode;
-import static com.example.employeemodel.util.UpdateUtils.readValue;
+import static com.example.employeemodel.helper.utils.UpdateUtils.getJsonNode;
+import static com.example.employeemodel.helper.utils.UpdateUtils.readValue;
 
 @Service
 @Transactional

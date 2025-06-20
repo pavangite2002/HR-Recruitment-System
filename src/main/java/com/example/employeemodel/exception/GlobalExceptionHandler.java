@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static com.example.employeemodel.util.ResponseBuilder.error;
+import static com.example.employeemodel.helper.utils.ResponseBuilder.error;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {

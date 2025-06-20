@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.example.employeemodel.util.ResponseBuilder.success;
+import static com.example.employeemodel.helper.utils.ResponseBuilder.success;
 
 @RestController
 @RequestMapping("/api/departments")

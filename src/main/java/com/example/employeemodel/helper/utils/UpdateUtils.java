@@ -1,4 +1,4 @@
-package com.example.employeemodel.util;
+package com.example.employeemodel.helper.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -20,6 +20,7 @@ public class UpdateUtils {
         try {
             return objectMapper.readValue(content, targetClass);
         } catch (JsonProcessingException e) {
+            System.err.println("JSON parsing failed: " + e.getOriginalMessage());
             return null;
         }
     }

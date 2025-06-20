@@ -11,6 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Builder
 public class CompanyResponseDto {
 
     private Long id;

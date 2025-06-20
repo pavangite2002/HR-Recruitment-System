@@ -1,6 +1,6 @@
 package com.example.employeemodel.dto;
 
-import com.example.employeemodel.validation.NullOrNotBlank;
+import com.example.employeemodel.helper.validations.NullOrNotBlank;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

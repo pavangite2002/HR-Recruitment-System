@@ -1,4 +1,4 @@
-package com.example.employeemodel.util;
+package com.example.employeemodel.helper.utils;
 
 import com.example.employeemodel.dto.RestApiResponse;
 

@@ -3,6 +3,8 @@ package com.example.employeemodel.service.impl;
 
 import com.example.employeemodel.dto.DepartmentDto;
 import com.example.employeemodel.dto.DepartmentResponseDto;
+import com.example.employeemodel.exception.BadRequestException;
+import com.example.employeemodel.exception.ResourceNotFoundException;
 import com.example.employeemodel.mapper.DepartmentMapper;
 import com.example.employeemodel.model.Company;
 import com.example.employeemodel.model.Department;
@@ -14,12 +16,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.example.employeemodel.util.UpdateUtils.getJsonNode;
-import static com.example.employeemodel.util.UpdateUtils.readValue;
+import static com.example.employeemodel.helper.utils.UpdateUtils.getJsonNode;
+import static com.example.employeemodel.helper.utils.UpdateUtils.readValue;
 
 @Service
 @RequiredArgsConstructor
@@ -41,32 +41,32 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public DepartmentResponseDto getById(Long id) {
-        Department department = departmentRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Department not found with ID: " + id));
+        Department department = departmentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Department not found with ID: " + id));
         return departmentMapper.departmentToDepartmentDto(department);
     }
 
     @Override
     public DepartmentResponseDto update(Long id, String dtoJson) {
-        Department existing = departmentRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Department not found with ID: " + id));
+        Department existing = departmentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Department not found with ID: " + id));
         DepartmentDto updatedFields = readValue(dtoJson, DepartmentDto.class);
         JsonNode jsonNode = getJsonNode(dtoJson);
         if (jsonNode.has("name")) {
             String name = updatedFields.getName();
             if (name.length() < 2 || name.length() > 100) {
-                throw new RuntimeException("Name must be between 2 and 100 characters.");
+                throw new BadRequestException("Name must be between 2 and 100 characters.");
             }
             existing.setName(name);
         }
         if (jsonNode.has("description")) {
             String desc = updatedFields.getDescription();
             if (desc != null && (desc.length() < 5 || desc.length() > 255)) {
-                throw new RuntimeException("Description must be between 5 and 255 characters.");
+                throw new BadRequestException("Description must be between 5 and 255 characters.");
             }
             existing.setDescription(desc);
         }
         if (jsonNode.has("companyId")) {
             Long companyId = updatedFields.getCompanyId();
-            Company company = companyRepository.findById(companyId).orElseThrow(() -> new RuntimeException("Company Id not Found....."));
+            Company company = companyRepository.findById(companyId).orElseThrow(() -> new ResourceNotFoundException("Company Id not Found with : " + companyId));
             existing.setCompany(company);
         }
         return departmentMapper.departmentToDepartmentDto(departmentRepository.save(existing));
@@ -74,7 +74,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public void delete(Long id) {
-        Department department = departmentRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Department not found with ID: " + id));
+        Department department = departmentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Department not found with ID: " + id));
         department.getSubCategories().clear();
         department.getEmployees().clear();
         departmentRepository.delete(department);

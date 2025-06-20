@@ -13,7 +13,8 @@ import java.util.List;
 public class SubCategory{
 
     @Id
-    @SequenceGenerator(name = "employee_seq", sequenceName = "employee_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subcat_seq")
+    @SequenceGenerator(name = "subcat_seq", sequenceName = "subcat_sequence", allocationSize = 1)
     private Long id;
 
     @Column(nullable = false, length = 50)

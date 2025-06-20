@@ -12,7 +12,7 @@ import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import static com.example.employeemodel.util.ResponseBuilder.*;
+import static com.example.employeemodel.helper.utils.ResponseBuilder.*;
 import java.util.List;
 
 

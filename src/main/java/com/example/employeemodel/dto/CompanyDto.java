@@ -1,17 +1,14 @@
 package com.example.employeemodel.dto;
 
-import com.example.employeemodel.validation.NullOrNotBlank;
+import com.example.employeemodel.helper.validations.NullOrNotBlank;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.validation.Valid;
 import lombok.*;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Builder
 public class CompanyDto {
 
     @NullOrNotBlank(min = 2, max = 100, isMandatory = "yes", message = "Company name is required and must be between {min} and {max} characters.")

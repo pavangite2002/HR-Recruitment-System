@@ -1,15 +1,12 @@
 package com.example.employeemodel.dto;
 
-import com.example.employeemodel.validation.NullOrNotBlank;
+import com.example.employeemodel.helper.validations.NullOrNotBlank;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor

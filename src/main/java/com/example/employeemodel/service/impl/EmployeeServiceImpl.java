@@ -21,8 +21,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static com.example.employeemodel.util.UpdateUtils.getJsonNode;
-import static com.example.employeemodel.util.UpdateUtils.readValue;
+import static com.example.employeemodel.helper.utils.UpdateUtils.getJsonNode;
+import static com.example.employeemodel.helper.utils.UpdateUtils.readValue;
 
 @Service
 @RequiredArgsConstructor

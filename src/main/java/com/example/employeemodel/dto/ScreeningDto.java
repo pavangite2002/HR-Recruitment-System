@@ -1,7 +1,7 @@
 package com.example.employeemodel.dto;
 
 
-import com.example.employeemodel.validation.NullOrNotBlank;
+import com.example.employeemodel.helper.validations.NullOrNotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;

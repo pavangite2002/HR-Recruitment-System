@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,4 +14,5 @@ import lombok.NoArgsConstructor;
 public class SubCategoryResponseDto {
     private Long id;
     private String name;
+    private List<EmployeeResponseDto> employeeResponseDtos;
 }
