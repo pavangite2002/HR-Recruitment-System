@@ -10,9 +10,10 @@ import com.example.employeemodel.mapper.CandidateMapper;
 import com.example.employeemodel.model.Candidate;
 import com.example.employeemodel.repository.CandidateRepository;
 import com.fasterxml.jackson.databind.JsonNode;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -24,7 +25,6 @@ import static com.example.employeemodel.helper.utils.UpdateUtils.getJsonNode;
 import static com.example.employeemodel.helper.utils.UpdateUtils.readValue;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class CandidateServiceImpl implements CandidateService {
 
@@ -42,8 +42,8 @@ public class CandidateServiceImpl implements CandidateService {
     }
 
     @Override
-    public List<CandidateProjectionResponse> getAllProjections() {
-        return candidateRepository.findAllProjectedBy();
+    public Page<CandidateProjectionResponse> getAllProjections(Pageable pageable) {
+        return candidateRepository.findAllProjectedBy(pageable);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class CandidateServiceImpl implements CandidateService {
 
         if (jsonNode.has("dob")) {
             LocalDate dob = fieldsToUpdate.getDob();
-            if (dob == null ) {
+            if (dob == null) {
                 throw new BadRequestException("Date of birth must be a past date and cannot be null");
             }
             existing.setDob(dob);

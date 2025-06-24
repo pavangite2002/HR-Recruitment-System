@@ -10,6 +10,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,9 +41,10 @@ public class CandidateController {
     }
 
     @GetMapping("/projected")
-    public ResponseEntity<RestApiResponse<List<CandidateProjectionResponse>>> getAllProjectedCandidates() {
-        return ResponseEntity.ok(success("All projected candidates fetched", candidateService.getAllProjections()));
+    public ResponseEntity<RestApiResponse<Page<CandidateProjectionResponse>>> getAllProjectedCandidates(@PageableDefault (size = 2,sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
+        return ResponseEntity.ok(success("All projected candidates fetched", candidateService.getAllProjections(pageable)));
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<RestApiResponse<CandidateResponseDto>> getCandidateById(@PathVariable Long id) {
